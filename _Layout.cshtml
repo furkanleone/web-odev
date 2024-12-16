@@ -1,0 +1,204 @@
+﻿@* Layout.cshtml *@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="Site keywords here">
+    <meta name="description" content="">
+    <meta name='copyright' content=''>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>JönTürk</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="css/nice-select.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="css/icofont.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="css/slicknav.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="css/owl-carousel.css">
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="css/datepicker.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="css/animate.min.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>@ViewData["Title"] - My Application</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <style>
+        /* Hover Efekti */
+        .navbar .nav-item .btn:hover {
+            color: #fff; /* Yazı rengini beyaza çevir */
+            background-color: #b5b5a5; /* Arka plan rengi değişikliği */
+            transition: color 0.3s, background-color 0.3s; /* Geçiş efekti */
+
+        }
+
+        <style >
+        .dropdown-menu {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-item {
+            padding: 10px 15px;
+            font-size: 1rem;
+        }
+
+            .dropdown-item:hover {
+                background-color: #007bff;
+                color: white;
+            }
+
+        .btn-outline-primary {
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+    </style>
+
+    </style>
+    
+
+
+</head>
+<body>
+
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg" style="background-color: #f5f5dc; font-family: 'Times New Roman', Times, serif; font-size: 1.1rem;">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a class="navbar-brand fs-3 fw-bold text-dark" href="/Home" style="font-family: 'Georgia', serif;">JönTürk</a>
+
+                <!-- Yönetici Kontrolü -->
+                @if (TempData["IsAdmin"] != null && (bool)TempData["IsAdmin"])
+                {
+                    <span class="badge bg-primary text-white fs-5">Yönetici</span>
+                }
+            </div>
+        </div>
+
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Menü -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-10">
+                    <!-- Menü Elemanları -->
+                <li class="nav-item">
+                      @if (User.IsInRole("Admin"))
+            {
+                    <a class="btn px-3 py-2 fs-5" style=" font-family: 'Georgia', serif;" href="/Appointment/Index">Randevu İşlemleri</a>
+            }
+                </li>
+                    <li class="nav-item">
+                        <a class="btn   px-3 py-2 fs-5" style=" font-family: 'Georgia', serif;" href="/Salon/Index">Salonlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn   px-3 py-2 fs-5" style=" font-family: 'Georgia', serif;" href="/Employee/Index">Berberler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn px-3 py-2 fs-5" style=" font-family: 'Georgia', serif;" href="/Appointment/Create">Randevu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn px-3 py-2 fs-5" style=" font-family: 'Georgia', serif;" href="/AI/Upload">Tavsiye</a>
+                    </li>
+                    <!-- Giriş Yap Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="btn  dropdown-toggle fs-5 px-3 py-2"
+                           href="#"
+                           id="loginDropdown"
+                           role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false"
+                           style="font-family: 'Georgia', serif;">
+                            Giriş Yap
+                        </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0"
+                        aria-labelledby="loginDropdown"
+                        style="border-radius: 15px; overflow: hidden; background-color: #f8f3e3;">
+                        <!-- Giriş Yap -->
+                        <li>
+                            <a class="dropdown-item py-3 px-4"
+                               href="/Account/Login"
+                               style="font-family: 'Georgia', serif; font-size: 1rem; color: #5a4634; font-weight: 600;">
+                                <i class="bi bi-box-arrow-in-right me-2" style="color: #5a4634;"></i> Giriş Yap
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <!-- Üye Ol -->
+                        <li>
+                            <a class="dropdown-item py-3 px-4"
+                               href="/Account/Register"
+                               style="font-family: 'Georgia', serif; font-size: 1rem; color: #5a4634; font-weight: 600;">
+                                <i class="bi bi-person-plus-fill me-2" style="color: #5a4634;"></i> Üye Ol
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-3 px-4" method="post"
+                               href="/Account/Logout"
+                               style="font-family: 'Georgia', serif; font-size: 1rem; color: #5a4634; font-weight: 600;">
+                                <i class="bi bi-person-plus-fill me-2" style="color: #5a4634;"></i> Çıkış Yap
+                            </a>
+                        </li>
+                    
+
+                    </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+   
+
+
+
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; @DateTime.Now.Year My Application</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="~/js/scripts.js"></script>
+</body>
+</html>
