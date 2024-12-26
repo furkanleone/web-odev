@@ -1,0 +1,115 @@
+﻿@using System.Globalization
+@model KuaforYonetim.Models.Appointment
+
+<div class="container py-5">
+    <h1 class="text-center">Randevular Haftalıktır</h1>
+    <h2 class="text-center">Yeni Randevu Ekle</h2>
+
+    <form asp-action="Create" method="post" class="p-4 bg-light rounded shadow">
+        <!-- Gün Seçimi -->
+        <div class="form-group mb-3">
+            <label for="Day" class="form-label fw-bold">Gün Seçiniz</label>
+            <select id="Day" name="Day" class="form-select" required>
+                <option value="">Bir gün seçiniz...</option>
+                @foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+                {
+                    <option value="@day">@CultureInfo.GetCultureInfo("tr-TR").DateTimeFormat.GetDayName(day)</option>
+                }
+            </select>
+        </div>
+
+        <!-- Çalışan Seçimi -->
+        <div class="form-group mb-3">
+            <label for="EmployeeId" class="form-label fw-bold">Çalışan Seçiniz</label>
+            <select id="EmployeeId" name="EmployeeId" class="form-select" required disabled>
+                <option value="">Önce gün seçiniz...</option>
+            </select>
+        </div>
+
+        <!-- Saat Dilimi Seçimi -->
+        <div class="form-group mb-3">
+            <label for="TimeSlot" class="form-label fw-bold">Saat Dilimi Seçiniz</label>
+            <select id="TimeSlot" name="SelectedTimeSlot" class="form-select" required disabled>
+                <option value="">Önce çalışan seçiniz...</option>
+            </select>
+        </div>
+
+        <!-- Diğer Bilgiler -->
+        <div class="form-group mb-3">
+            <label for="CustomerName" class="form-label fw-bold">Ad Soyad</label>
+            <input type="text" id="CustomerName" name="CustomerName" class="form-control" placeholder="Adınızı ve Soyadınızı Giriniz" required />
+        </div>
+        <div class="form-group mb-3">
+            <label for="Phone" class="form-label fw-bold">Telefon</label>
+            <input type="text" id="Phone" name="Phone" class="form-control" placeholder="Telefon Numaranızı Giriniz" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Kaydet</button>
+    </form>
+</div>
+
+<script>
+    // Gün seçildiğinde çalışanları getir
+    document.getElementById("Day").addEventListener("change", function () {
+        const day = this.value;
+        const employeeSelect = document.getElementById("EmployeeId");
+        const slotSelect = document.getElementById("TimeSlot");
+
+        // Gün seçildiğinde önce çalışan ve saat dilimlerini sıfırla
+        employeeSelect.innerHTML = `<option value="">Önce gün seçiniz...</option>`;
+        slotSelect.innerHTML = `<option value="">Önce çalışan seçiniz...</option>`;
+        employeeSelect.disabled = true;
+        slotSelect.disabled = true;
+
+        if (day) {
+            fetch(`/Appointment/GetEmployeesByDay?day=${day}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        employeeSelect.innerHTML = `<option value="">Bir çalışan seçiniz...</option>`;
+                        data.forEach(employee => {
+                            employeeSelect.innerHTML += `<option value="${employee.id}">${employee.name}</option>`;
+                        });
+                        employeeSelect.disabled = false;
+                    } else {
+                        alert("Seçilen gün için uygun çalışan bulunamadı.");
+                    }
+                })
+                .catch(err => {
+                    console.error("Hata oluştu:", err);
+                    alert("Çalışan bilgileri yüklenirken bir hata oluştu.");
+                });
+        }
+    });
+
+    // Çalışan seçildiğinde saat dilimlerini getir
+    document.getElementById("EmployeeId").addEventListener("change", function () {
+        const employeeId = this.value;
+        const day = document.getElementById("Day").value;
+        const slotSelect = document.getElementById("TimeSlot");
+
+        // Çalışan seçildiğinde saat dilimlerini sıfırla
+        slotSelect.innerHTML = `<option value="">Önce çalışan seçiniz...</option>`;
+        slotSelect.disabled = true;
+
+        if (employeeId && day) {
+            fetch(`/Appointment/GetAvailableSlots?employeeId=${employeeId}&day=${day}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        slotSelect.innerHTML = `<option value="">Bir saat dilimi seçiniz...</option>`;
+                        data.forEach(slot => {
+                            slotSelect.innerHTML += `<option value="${slot.startTime}">${slot.startTime} - ${slot.endTime}</option>`;
+                        });
+                        slotSelect.disabled = false;
+                    } else {
+                        alert("Seçilen çalışan için uygun saat dilimi bulunamadı.");
+                    }
+                })
+                .catch(err => {
+                    console.error("Hata oluştu:", err);
+                    alert("Saat dilimleri yüklenirken bir hata oluştu.");
+                });
+        }
+    });
+</script>
