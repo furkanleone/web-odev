@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Öneriniz";
+}
+
+
+<title>@ViewData["Title"]</title>
+<style>
+
+
+    .container {
+        max-width: 600px;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-size: 16px;
+        color: #555;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .file-upload-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        border: 2px dashed #4CAF50;
+        padding: 20px;
+        background-color: #f1fdf1;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+
+    button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #45a245;
+        }
+</style>
+<h2>Öneriniz:</h2>
+<p>"Merhaba! Saç tipinize uygun birkaç harika önerim var. Kıvırcık saçlar için doğal dokuyu vurgulayan ve hacmi 
+    ön plana çıkaran bir görünüm her zaman şıklığınızı artırabilir. Örneğin, omuz hizasında katlı bir kesim veya 
+    doğal dalgalarınızı belirginleştiren bir katmanlı saç modeli tercih edebilirsiniz. Daha sofistike bir görünüm için,
+    alnınızı çerçeveleyen hafif perçemler de eklenebilir. Eğer saçlarınızın uzunluğunu korumak istiyorsanız, yumuşak katmanla
+    r ekleyerek saç uçlarınızı daha hacimli gösterebilirsiniz. Unutmayın, saçınızın doğal dokusunu vurgulayan doğru kesim, hem 
+    tarzınızı hem de kendinize olan güveninizi artırır. 
+    Her saç tipi eşsizdir ve bu eşsizliği kucaklamak en iyi seçim olacaktır!"</p>
+
+<button type ="submit"><a asp-action="Upload">Yeni bir fotoğraf yükle</a></button>

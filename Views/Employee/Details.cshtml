@@ -1,0 +1,59 @@
+﻿@model KuaforYonetim.Models.Employee
+@using System.Globalization;
+
+<div class="container py-5">
+    <!-- Başlık -->
+    <h1 class="text-center mb-4 display-5 fw-bold text-primary">Çalışan Detayları</h1>
+
+    <!-- Detay Kartı -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+                    <!-- Ad Soyad -->
+                    <p class="h4 fw-bold text-dark mb-3">
+                        <i class="bi bi-person-circle me-2 text-primary"></i>Ad Soyad: <span class="fw-normal">@Model.Name</span>
+                    </p>
+                    <!-- Görev -->
+                    <p class="h5 text-secondary mb-3">
+                        <i class="bi bi-briefcase-fill me-2 text-success"></i>Görev: <span class="fw-normal">@Model.Position</span>
+                    </p>
+                    <!-- Telefon -->
+                    <p class="h5 text-secondary mb-3">
+                        <i class="bi bi-telephone-fill me-2 text-warning"></i>Telefon: <span class="fw-normal">@Model.Phone</span>
+                    </p>
+                    <!-- Email -->
+                    <p class="h5 text-secondary mb-3">
+                        <i class="bi bi-envelope-fill me-2 text-danger"></i>Email: <span class="fw-normal">@Model.Email</span>
+                    </p>
+                    <!-- Uygunluk Bilgileri -->
+                    <p class="h5 text-secondary mb-3">
+                        <i class="bi bi-calendar-check me-2 text-info"></i>Uygunluk Saatleri:
+                    </p>
+                    @if (Model.Availability != null && Model.Availability.Any())
+                    {
+                        <ul class="list-unstyled">
+                            @foreach (var slot in Model.Availability)
+                            {
+                                <li class="text-dark">
+                                    Gün: @CultureInfo.GetCultureInfo("tr-TR").DateTimeFormat.GetDayName(slot.Day),
+                                    Saat: @slot.StartTime.ToString(@"hh\:mm") - @slot.EndTime.ToString(@"hh\:mm")
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Uygunluk saatleri belirtilmemiş.</p>
+                    }
+                </div>
+                <!-- Geri Dön Butonu -->
+                <div class="card-footer text-center bg-light">
+                    <a href="/Employee/Index" class="btn btn-outline-primary btn-lg px-4">
+                        <i class="bi bi-arrow-left-circle me-2"></i>Geri Dön
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

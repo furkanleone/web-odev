@@ -1,0 +1,85 @@
+﻿@model IEnumerable<KuaforYonetim.Models.Employee>
+@using System.Globalization;
+
+<div class="container py-5">
+    <!-- Büyük Kutunun Başlangıcı -->
+    <div class="p-5 rounded shadow border" style="background-color: #f8f3e3; border-color: #d4c6a6;">
+        <!-- Başlık ve Ekleme Butonu -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-center mb-4" style="font-family: 'Georgia', serif; font-size: 2.8rem; color: #5a4634;">Berberler</h1>
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="/Employee/Create" class="btn btn-success btn-lg">+ Yeni Berber Ekle</a>
+            }
+
+        </div>
+        <!-- Çalışan Kartları -->
+        <div class="row g-4">
+            @foreach (var employee in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <!-- Çalışan Adı -->
+                            <h5 class="card-title fw-bold text-dark">
+                                <i class="bi bi-person-fill me-2 text-primary"></i>@employee.Name
+                            </h5>
+                            <!-- Pozisyon -->
+                            <p class="card-text text-muted">
+                                <i class="bi bi-briefcase-fill me-2 text-secondary"></i>@employee.Position
+                            </p>
+                            <!-- Telefon -->
+                            <p class="card-text text-muted">
+                                <i class="bi bi-telephone-fill me-2 text-success"></i>@employee.Phone
+                            </p>
+                            <!-- Email -->
+                            <p class="card-text text-muted">
+                                <i class="bi bi-envelope-fill me-2 text-warning"></i>@employee.Email
+                            </p>
+                            <!-- Uygunluk Saatleri -->
+                            <p class="card-text">
+                                <i class="bi bi-calendar-check me-2 text-info"></i>
+                                @if (employee.Availability != null && employee.Availability.Any())
+                                {
+                                    <ul class="list-unstyled mb-0">
+                                        @foreach (var slot in employee.Availability)
+                                        {
+                                            <li class="text-muted">
+                                                Gün: @CultureInfo.GetCultureInfo("tr-TR").DateTimeFormat.GetDayName(slot.Day),
+                                                Saat: @slot.StartTime.ToString("hh\\:mm") - @slot.EndTime.ToString("hh\\:mm")
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Uygunluk saatleri belirtilmemiş.</span>
+                                }
+                            </p>
+                            <!-- İşlem Butonları -->
+                            <div class="d-flex mt-3">
+                                <a href="/Employee/Details/@employee.Id" class="btn btn-info btn-sm me-2">
+                                    <i class="bi bi-eye"></i> Detaylar
+                                </a>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a href="/Employee/Edit/@employee.Id" class="btn btn-warning btn-sm me-2">
+                                        <i class="bi bi-pencil"></i> Düzenle
+                                    </a>
+                                    <form asp-action="Delete" method="post" onsubmit="return confirm('Bu çalışanı silmek istediğinizden emin misiniz?');" style="display:inline;">
+                                        <input type="hidden" name="id" value="@employee.Id" />
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash"></i> Sil
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+    <!-- Büyük Kutunun Sonu -->
+</div>

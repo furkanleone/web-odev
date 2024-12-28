@@ -1,0 +1,55 @@
+﻿@model KuaforYonetim.Models.Salon
+
+<div class="container py-5">
+    <!-- Büyük Kutunun Başlangıcı -->
+    <div class="p-5 rounded shadow border" style="background-color: #f8f3e3; border-color: #d4c6a6;">
+        <!-- Başlık -->
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold" style="font-family: 'Georgia', serif; color: #5a4634;">Yeni Salon Ekle</h1>
+            <p class="lead" style="font-family: 'Palatino Linotype', serif; color: #7b6a54;">Lütfen salon bilgilerini giriniz.</p>
+        </div>
+
+        <!-- Form Başlangıcı -->
+        <form asp-action="Create" method="post">
+            <!-- Salon Adı -->
+            <div class="mb-4">
+                <label for="Name" class="form-label" style="font-family: 'Times New Roman', serif; color: #5a4634;">Salon Adı</label>
+                <input type="text" id="Name" name="Name" class="form-control rounded-3 border-0 shadow-sm" required
+                       style="background-color: #fffaf3; font-family: 'Palatino Linotype', serif; color: #7b6a54;" />
+            </div>
+            <!-- Adres -->
+            <div class="mb-4">
+                <label for="Address" class="form-label" style="font-family: 'Times New Roman', serif; color: #5a4634;">Adres</label>
+                <input type="text" id="Address" name="Address" class="form-control rounded-3 border-0 shadow-sm" required
+                       style="background-color: #fffaf3; font-family: 'Palatino Linotype', serif; color: #7b6a54;" />
+            </div>
+            <!-- Telefon -->
+            <div class="mb-4">
+                <label for="Phone" class="form-label" style="font-family: 'Times New Roman', serif; color: #5a4634;">Telefon</label>
+                <input type="text" id="Phone" name="Phone" class="form-control rounded-3 border-0 shadow-sm" required
+                       style="background-color: #fffaf3; font-family: 'Palatino Linotype', serif; color: #7b6a54;" />
+            </div>
+            <!-- Çalışma Saatleri -->
+            <div class="mb-4">
+                <label for="WorkingHours" class="form-label" style="font-family: 'Times New Roman', serif; color: #5a4634;">Çalışma Saatleri</label>
+                <input type="text" id="WorkingHours" name="WorkingHours" class="form-control rounded-3 border-0 shadow-sm" required
+                       style="background-color: #fffaf3; font-family: 'Palatino Linotype', serif; color: #7b6a54;" />
+            </div>
+            <!-- Fotoğraf Dosya Adı -->
+            <div class="mb-4">
+                <label for="Image" class="form-label" style="font-family: 'Times New Roman', serif; color: #5a4634;">Fotoğraf Dosya Adı</label>
+                <input type="text" id="Image" name="Image" class="form-control rounded-3 border-0 shadow-sm"
+                       style="background-color: #fffaf3; font-family: 'Palatino Linotype', serif; color: #7b6a54;" />
+            </div>
+            <!-- Ekle Butonu -->
+            <div class="text-center">
+                <button type="submit" class="btn px-5 py-2 rounded-pill text-white"
+                        style="background-color: #5a4634; font-family: 'Palatino Linotype', serif; border: none;">
+                    Ekle
+                </button>
+            </div>
+        </form>
+        <!-- Form Sonu -->
+    </div>
+    <!-- Büyük Kutunun Sonu -->
+</div>

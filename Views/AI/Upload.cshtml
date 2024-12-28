@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Fotoğraf Yükle";
+}
+
+
+    <title>@ViewData["Title"]</title>
+    <style>
+      
+
+        .container {
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            border: 2px dashed #4CAF50;
+            padding: 20px;
+            background-color: #f1fdf1;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+         
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #45a245;
+            }
+        
+    </style>
+
+    <div class="container">
+        <h2>Fotoğraf Yükle</h2>
+
+        <form asp-action="Result" method="get" enctype="multipart/form-data">
+            <label for="uploadedPhoto">Fotoğraf Yükleyin:</label>
+
+            <div class="file-upload-wrapper" onclick="document.getElementById('uploadedPhoto').click()">
+                <span>Fotoğraf Seçin</span>
+            </div>
+
+            <input type="file" id="uploadedPhoto" name="uploadedPhoto" accept="image/*" required />
+
+            <button type="submit">Gönder</button>
+        </form>
+
+       
+

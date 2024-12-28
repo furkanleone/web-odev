@@ -1,0 +1,53 @@
+﻿@model KuaforYonetim.Models.Salon
+
+<div class="container py-5">
+    <!-- Büyük Kutunun Başlangıcı -->
+    <div class="p-5 rounded shadow border" style="background-color: #f8f3e3; border-color: #d4c6a6;">
+        <!-- Başlık -->
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold" style="font-family: 'Georgia', serif; color: #5a4634;">@Model.Name</h1>
+            <p class="lead" style="font-family: 'Palatino Linotype', serif; color: #7b6a54;">Salon Detayları</p>
+        </div>
+
+        <!-- İçerik Alanı -->
+        <div class="row align-items-center">
+            <!-- Sol Kısım: Resim -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="~/images/@Model.Image" class="img-fluid rounded shadow" alt="@Model.Name"
+                     style="width: 100%; max-height: 400px; object-fit: cover; border: 3px solid #d4c6a6;">
+            </div>
+
+            <!-- Sağ Kısım: Bilgiler -->
+            <div class="col-md-6">
+                <div class="card border-0" style="background-color: #fffaf3;">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <!-- Adres -->
+                            <li class="list-group-item" style="background-color: #fffaf3;">
+                                <h5 style="font-family: 'Times New Roman', serif; color: #5a4634;">
+                                    <i class="bi bi-geo-alt-fill me-2" style="color: #a67845;"></i><strong>Adres:</strong>
+                                </h5>
+                                <p style="font-family: 'Palatino Linotype', serif; color: #7b6a54;">@Model.Address</p>
+                            </li>
+                            <!-- Telefon -->
+                            <li class="list-group-item" style="background-color: #fffaf3;">
+                                <h5 style="font-family: 'Times New Roman', serif; color: #5a4634;">
+                                    <i class="bi bi-telephone-fill me-2" style="color: #8b5e3c;"></i><strong>Telefon:</strong>
+                                </h5>
+                                <p style="font-family: 'Palatino Linotype', serif; color: #7b6a54;">@Model.Phone</p>
+                            </li>
+                            <!-- Çalışma Saatleri -->
+                            <li class="list-group-item" style="background-color: #fffaf3;">
+                                <h5 style="font-family: 'Times New Roman', serif; color: #5a4634;">
+                                    <i class="bi bi-clock-fill me-2" style="color: #aa8236;"></i><strong>Çalışma Saatleri:</strong>
+                                </h5>
+                                <p style="font-family: 'Palatino Linotype', serif; color: #7b6a54;">@Model.WorkingHours</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Büyük Kutunun Sonu -->
+</div>

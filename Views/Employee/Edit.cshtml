@@ -1,0 +1,93 @@
+﻿@using System.Globalization
+@model KuaforYonetim.Models.Employee
+
+<div class="container py-5">
+    <!-- Başlık -->
+    <h1 class="text-center mb-5 display-5 fw-bold text-primary">Çalışanı Düzenle</h1>
+    <p class="text-center text-muted mb-4">
+        Çalışan bilgilerini ve uygunluk bilgilerini güncellemek için aşağıdaki formu doldurun. Eksiksiz ve doğru bilgiler girdiğinizden emin olun.
+    </p>
+
+    <!-- Form -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <form asp-action="Edit" method="post" class="p-5 bg-light rounded shadow-lg">
+                <!-- Gizli Id -->
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+                <!-- Ad Soyad -->
+                <div class="form-group mb-4">
+                    <label for="Name" class="form-label fw-bold">Ad Soyad</label>
+                    <input type="text" id="Name" name="Name" class="form-control form-control-lg" value="@Model.Name" placeholder="Ad Soyad" required />
+                </div>
+
+                <!-- Görev -->
+                <div class="form-group mb-4">
+                    <label for="Position" class="form-label fw-bold">Görev</label>
+                    <input type="text" id="Position" name="Position" class="form-control form-control-lg" value="@Model.Position" placeholder="Görev" required />
+                </div>
+
+                <!-- Telefon -->
+                <div class="form-group mb-4">
+                    <label for="Phone" class="form-label fw-bold">Telefon</label>
+                    <input type="text" id="Phone" name="Phone" class="form-control form-control-lg" value="@Model.Phone" placeholder="Telefon" />
+                </div>
+
+                <!-- Email -->
+                <div class="form-group mb-4">
+                    <label for="Email" class="form-label fw-bold">Email</label>
+                    <input type="email" id="Email" name="Email" class="form-control form-control-lg" value="@Model.Email" placeholder="Email" />
+                </div>
+
+                <!-- Uygunluk Bilgileri -->
+                <div class="form-group mb-4">
+                    <label for="Availability" class="form-label fw-bold">Uygunluk Bilgileri</label>
+                    <div id="availability-container">
+                        @if (Model.Availability != null && Model.Availability.Any())
+                        {
+                            @for (var i = 0; i < Model.Availability.Count; i++)
+                            {
+                                <div class="row align-items-center mb-2">
+                                    <div class="col-md-4">
+                                        <label class="form-label">Gün</label>
+                                        <select name="Availability[@i].Day" class="form-select">
+    @foreach (var day in Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>())
+    {
+        var dayName = CultureInfo.GetCultureInfo("tr-TR").DateTimeFormat.GetDayName(day);
+        var isSelected = day == Model.Availability[i].Day ? "selected" : "";
+        @: <option value="@day" @isSelected>@dayName</option>
+    }
+</select>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Başlangıç Saati</label>
+                                        <input type="time" name="Availability[@i].StartTime" class="form-control" value="@Model.Availability[i].StartTime.ToString(@"hh\:mm")" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Bitiş Saati</label>
+                                        <input type="time" name="Availability[@i].EndTime" class="form-control" value="@Model.Availability[i].EndTime.ToString(@"hh\:mm")" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger mt-4" onclick="removeAvailability(this)">Sil</button>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-muted">Henüz bir uygunluk bilgisi eklenmemiş.</p>
+                        }
+                    </div>
+                    <button type="button" class="btn btn-outline-primary mt-3" onclick="addAvailability()">Uygunluk Ekle</button>
+                </div>
+
+                <!-- Düğme ve İptal -->
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <a href="/Employee/Index" class="btn btn-outline-secondary btn-lg px-5">İptal</a>
+                    <button type="submit" class="btn btn-primary btn-lg px-5">Güncelle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

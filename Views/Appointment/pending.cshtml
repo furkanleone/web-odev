@@ -1,0 +1,85 @@
+﻿@model IEnumerable<KuaforYonetim.Models.Appointment>
+
+<div class="container py-5">
+    <!-- Başlık ve Açıklama -->
+    <div class="p-4 bg-light rounded shadow-sm mb-4 text-center">
+        <h1 class="display-6 fw-bold text-dark">Bekleyen Randevular</h1>
+        <p class="text-secondary">Onay bekleyen tüm randevuları görüntüleyin ve yönetim işlemlerini gerçekleştirin.</p>
+        <a asp-controller="Appointment" asp-action="Index" class="btn btn-secondary mt-3">Tüm Randevulara Dön</a>
+    </div>
+
+    <!-- Randevular Tablosu -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Ad Soyad</th>
+                    <th>Hizmet</th>
+                    <th>Tarih</th>
+                    <th>Telefon</th>
+                    <th>Çalışan</th>
+                    <th>Durum</th>
+                    <th class="text-center">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">Bekleyen randevu bulunmamaktadır.</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var appointment in Model)
+                    {
+                        <tr>
+                            <td>@appointment.CustomerName</td>
+                            <td>@appointment.Service</td>
+                            <td>@appointment.Date.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@appointment.Phone</td>
+                            <td>@(appointment.Employee?.Name ?? "Çalışan Belirtilmedi")</td>
+                            <td>
+                                <span class="badge @GetStatusClass(appointment.Status)">
+                                    @GetStatusDisplay(appointment.Status)
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a asp-controller="Appointment" asp-action="Approve" asp-route-id="@appointment.Id" class="btn btn-success btn-sm">Onayla</a>
+                                    <a asp-controller="Appointment" asp-action="Reject" asp-route-id="@appointment.Id" class="btn btn-danger btn-sm">Reddet</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@functions {
+    // Duruma göre CSS sınıfını döndür
+    public string GetStatusClass(string status)
+    {
+        return status switch
+        {
+            "Pending" => "bg-warning text-dark",
+            "Approved" => "bg-success text-light",
+            "Rejected" => "bg-danger text-light",
+            _ => "bg-secondary text-dark"
+        };
+    }
+
+    // Durumun Türkçe karşılığını döndür
+    public string GetStatusDisplay(string status)
+    {
+        return status switch
+        {
+            "Pending" => "Bekliyor",
+            "Approved" => "Onaylandı",
+            "Rejected" => "Reddedildi",
+            _ => "Bilinmiyor"
+        };
+    }
+}

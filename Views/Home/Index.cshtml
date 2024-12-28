@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Anasayfa";
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
+<header class="bg-dark py-5" style="position: relative; min-height: 300px;">
+    <!-- Fotoğraf -->
+    <img src="~/images/4.jpg" alt="Kuaför Yönetim Sistemi" style="width: 200%; height: 200%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 0;">
+
+
+    <!-- Yazılar -->
+    <div class="container px-5" style="position: relative; z-index: 1;">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center my-5">
+                    <h1 class="display-5 fw-bolder text-white mb-2">JönTürk - Saçlarınıza Değer Katar</h1>
+                    <p class="display-6 lead text-white-50 mb-2">
+                        Bir Berberden Fazlası...
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Koyu Katman -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 200%; background-color: rgba(0, 0, 0, 0.5); z-index: 0;"></div>
+</header>
+
+<section class="py-2" style="margin-top: 300px;">
+    <div class="container px-5 my-5">
+        <div class="row gx-5">
+            <!-- Salonlar Kutusu -->
+            <div class="col-lg-4 mb-5">
+                <img src="~/images/serdivan.jpg" alt="Salon Resmi" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card shadow border-0">
+                    <div class="card-body text-center">
+                        <h2 class="h4 fw-bold">Salon</h2>
+                        <p>Size En Yakın Salonumuza Bakabilirsiniz</p>
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="/Salon">Salonlar</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Çalışanlar Kutusu -->
+            <div class="col-lg-4 mb-5">
+                <img src="~/images/author2.jpg" alt="Salon Resmi" class="card-img-top" style="height: 200px; object-fit: cover;">
+
+                <div class="card shadow border-0">
+                    <div class="card-body text-center">
+                        <h2 class="h4 fw-bold">Berber</h2>
+                        <p>BerberLerimizi Tanıyın</p>
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="/Employee">Berberler</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Randevular Kutusu -->
+            <div class="col-lg-4 mb-5">
+                <img src="~/images/2.jpg" alt="Randevu" class="card-img-top" style="height: 200px; object-fit: cover;">
+
+                <div class="card shadow border-0">
+                    <div class="card-body text-center">
+                        <h2 class="h4 fw-bold">Randevu</h2>
+                        <p>Size Uygun Bir Zaman İçin Randevu Oluşturun</p>
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="/Appointment">Randevu Al</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Yapay Zeka  -->
+            <div class="col-lg-4 mb-5">
+                <img src="~/images/robot1.jpg" alt="Randevu" class="card-img-top" style="height: 200px; object-fit: cover;">
+
+                <div class="card shadow border-0">
+                    <div class="card-body text-center">
+                        <h2 class="h4 fw-bold">Saç Tipi Önerisi</h2>
+                        <p>Salonumuza Gelmeden Size En Uygun Saç Tipi Önerisini Hemen Öğrenin</p>
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="/AI/Upload">Tavsiye Al</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

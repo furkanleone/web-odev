@@ -1,0 +1,62 @@
+﻿@model IEnumerable<KuaforYonetim.Models.Salon>
+
+<div class="container py-5">
+    <!-- Vintage Büyük Kutunun Başlangıcı -->
+    <div class="p-5 rounded shadow border" style="background-color: #f8f3e3; border-color: #d4c6a6;">
+        <!-- Başlık -->
+        <h1 class="text-center mb-4" style="font-family: 'Georgia', serif; font-size: 2.8rem; color: #5a4634;">Salonlarımız</h1>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="/Salon/Create" class="btn btn-success btn-lg">+ Yeni Salon Ekle</a>
+            }
+
+        </div>
+
+
+        <!-- Alt Başlık -->
+        <p class="text-center mb-4" style="font-family: 'Palatino Linotype', serif; color: #7b6a54; font-size: 1.2rem;">
+            Konforun zarafetini yansıtan modern salonlarımız.
+        </p>
+
+        <!-- Salon Kartları -->
+        <div class="row g-4">
+           
+            @foreach (var salon in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm" style="border: none; background-color: #fffaf3;">
+                        <!-- Resim -->
+                        <img src="~/images/@salon.Image" class="card-img-top rounded" alt="@salon.Name"
+                             style="height: 250px; object-fit: cover; border-bottom: 3px solid #d4c6a6;">
+                        <div class="card-body">
+                            <!-- Kart Başlık -->
+                            <h5 class="card-title mb-3" style="font-family: 'Times New Roman', serif; color: #5a4634; font-size: 1.5rem;">
+                                @salon.Name
+                            </h5>
+                            <!-- Adres -->
+                            <p class="card-text mb-2" style="font-family: 'Palatino Linotype', serif; color: #7b6a54;">
+                                <i class="bi bi-geo-alt-fill me-2" style="color: #a67845;"></i>@salon.Address
+                            </p>
+                            <!-- Telefon -->
+                            <p class="card-text mb-2" style="font-family: 'Palatino Linotype', serif; color: #7b6a54;">
+                                <i class="bi bi-telephone-fill me-2" style="color: #8b5e3c;"></i><strong>Telefon:</strong> @salon.Phone
+                            </p>
+                            <!-- Çalışma Saatleri -->
+                            <p class="card-text mb-3" style="font-family: 'Palatino Linotype', serif; color: #7b6a54;">
+                                <i class="bi bi-clock-fill me-2" style="color: #aa8236;"></i><strong>Çalışma Saatleri:</strong> @salon.WorkingHours
+                            </p>
+                            <!-- Detay Butonu -->
+                            <a href="/Salon/Details/@salon.Id" class="btn w-100"
+                               style="background-color: #a67845; color: #ffffff; font-family: 'Palatino Linotype', serif;">
+                                Detaylar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- Vintage Büyük Kutunun Sonu -->
+</div>

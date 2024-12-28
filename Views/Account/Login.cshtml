@@ -1,0 +1,66 @@
+﻿@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <!-- Başlık -->
+                <div class="card-header text-center p-4" style="background-color: #6c757d;">
+                    <h4 class="text-white mb-0" style="font-family: 'Georgia', serif; font-size: 2.5rem;">
+                        Giriş Yap
+                    </h4>
+                </div>
+
+                <!-- Form İçeriği -->
+                <div class="card-body p-5" style="background-color: #f8f3e3;">
+                    <form method="post" action="/Account/Login">
+                        <!-- Kullanıcı Adı -->
+                        <div class="form-group mb-4">
+                            <label for="username" class="form-label" style="color: #5a4634; font-weight: 600;">Kullanıcı Adı</label>
+                            <input type="text"
+                                   id="username"
+                                   name="username"
+                                   class="form-control rounded-pill shadow-sm"
+                                   placeholder="E-posta adresinizi girin"
+                                   style="font-size: 1rem;"
+                                   required />
+                        </div>
+
+                        <!-- Şifre -->
+                        <div class="form-group mb-4">
+                            <label for="password" class="form-label" style="color: #5a4634; font-weight: 600;">Şifre</label>
+                            <input type="password"
+                                   id="password"
+                                   name="password"
+                                   class="form-control rounded-pill shadow-sm"
+                                   placeholder="Şifrenizi girin"
+                                   style="font-size: 1rem;"
+                                   required />
+                        </div>
+
+                        <!-- Giriş Butonu -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary rounded-pill py-2 shadow-sm"
+                                    style="font-family: 'Georgia', serif; font-size: 1.2rem; font-weight: 600; background-color: #5a4634; border: none;">
+                                Giriş Yap
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Hata Mesajı -->
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger mt-4" style="font-size: 0.9rem;">
+                            @ViewBag.Error
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
